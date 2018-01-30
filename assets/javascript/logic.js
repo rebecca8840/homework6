@@ -7,6 +7,8 @@ $( document ).ready(function() {
     	var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
         city + "&api_key=aRzEvvatJe5JykmA2OazGtZWxh3SW1Gc" 
 
+        var cityArray = ["boston", "philadelphia", "toronto", "montreal", "london", "reykjavik"]
+
         $.ajax({
         	 
         	 url: queryURL,
@@ -47,4 +49,38 @@ $( document ).ready(function() {
         	   		 	}
         	   		});
         	   });
+
+    // rendering the buttons
+
+    function renderButtons() {
+
+    	$("#cityView").empty();
+
+    	for (var i = 0; i < cityArray.length; i++) {
+    		
+    		var button = $("<button>");
+
+    		button.addClass("city");
+
+    		button.attr("data-name", cityArray[i]);
+
+    		button.text(cityArray[i]);
+
+    		$("#cityView").append(button);
+    	}
+    }
+
+    $("#add-city").on("click", function(event) {
+
+    	event.preventDefault();
+
+    	var city1 = $("#city-input").val().trim();
+
+    	cityArray.push(city1);
+
+    	renderButtons();
+    });
+
+    renderButtons();
+    
     });
